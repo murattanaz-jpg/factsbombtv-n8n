@@ -1,9 +1,7 @@
-FROM node:18-alpine
+FROM n8nio/n8n:1.30.1
 
-RUN apk add --no-cache ffmpeg
+USER root
 
-RUN npm install -g n8n
+RUN apk add --no-cache ffmpeg || apt-get update && apt-get install -y ffmpeg || true
 
-EXPOSE 5678
-
-CMD ["n8n", "start"]
+USER node
